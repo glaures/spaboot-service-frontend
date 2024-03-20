@@ -1,0 +1,9 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+#app {
+}
+
+.h1 {
+    padding-bottom: 12px;
+    border-bottom: 1px solid grey;
+}
