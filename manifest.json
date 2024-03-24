@@ -1,0 +1,21 @@
+{
+
+  "name": "SPABoot Service",
+
+  "short_name": "Service",
+
+  "start_url": "https://glaures.github.io/spaboot-service-frontend",
+
+  "display": "standalone",
+
+  "icons": [{
+
+    "src": "icons/apple-touch-icon-180x180.png",
+
+    "sizes": "180x180",
+
+    "type": "image/png"
+
+  }]
+
+}
