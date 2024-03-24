@@ -1,6 +1,6 @@
 {
   "name": "SPABoot Service",
-  "short_name": "Service 2",
+  "short_name": "SPABoot Service",
   "start_url": ".",
   "background_color": "#5A738A",
   "theme_color": "#5A738A",
