@@ -34,7 +34,7 @@ import TaskList from "@/components/TaskList.vue";
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">{{infoHeader}}</h5>
+          <h5 class="modal-title">{{ infoHeader }}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" v-html="info">
@@ -48,10 +48,17 @@ import TaskList from "@/components/TaskList.vue";
 import {createClient} from "contentful";
 import {documentToHtmlString} from "@contentful/rich-text-html-renderer";
 import {Modal} from "bootstrap";
+import { BLOCKS } from '@contentful/rich-text-types';
 
 const space = 'gdb2xwu41tp3'
 const accessToken = 'sog4clElan4c9rnNSsqJhxf42oLKRfSxQimYOJBxEu4'
 const contentful = createClient({space: space, accessToken: accessToken})
+const renderHtmlOptions = {
+  renderNode: {
+    [BLOCKS.EMBEDDED_ASSET]: ({ data: { target: { fields }}}) =>
+        `<img src="${fields.file.url}" width="300" alt="${fields.description}"/>`,
+  },
+}
 export default {
   name: "ProcessView",
   props: {
@@ -91,8 +98,7 @@ export default {
   methods: {
     async loadTasks() {
       console.log("processId: " + this.processId)
-      const process = await contentful.getEntry(this.processId)
-          .then(p => p.fields)
+      const process = await contentful.getEntry(this.processId, {limit: 1, include: 10}).then(p => p.fields)
           .catch(err => console.error(err))
       console.log("process is " + process.title)
       if (process.includes) {
@@ -111,8 +117,8 @@ export default {
     },
     showInfo(task) {
       this.infoHeader = task.fields.name
-      this.info = documentToHtmlString(task.fields.description)
-      this.uniqueModal = new Modal(document.getElementById("infoModal"),{ keyboard: false });
+      this.info = documentToHtmlString(task.fields.description, renderHtmlOptions)
+      this.uniqueModal = new Modal(document.getElementById("infoModal"), {keyboard: false});
       this.uniqueModal.show();
     }
   },

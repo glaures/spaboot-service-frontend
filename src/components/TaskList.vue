@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 export default {
   name: "TaskList",
   components: {FontAwesomeIcon},
-  emits: 'showInfo',
+  emits: ['showInfo'],
   props: {
     tasks: Array
   }
