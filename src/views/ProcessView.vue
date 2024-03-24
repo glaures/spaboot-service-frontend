@@ -103,10 +103,10 @@ export default {
   methods: {
     async loadTasks() {
       console.log("processId: " + this.processId)
-      const process = await this.loadProcess(this.processId, this.$route.query.trip)
+      const process = await this.loadProcess(this.processId, this.$route.query.trip === 'true')
       if(this.processId2) {
         console.log("processId2: " + this.processId2)
-        const process2 = await this.loadProcess(this.processId2, this.$route.query.trip2)
+        const process2 = await this.loadProcess(this.processId2, this.$route.query.trip2 === 'true')
         process.tasks.push.apply(process.tasks, process2.tasks)
         process.title += ' ' + process2.title
       }
