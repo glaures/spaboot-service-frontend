@@ -11,7 +11,7 @@ import Version from "@/components/Version.vue";
   <div class="fixed-top-margin pb-5">
     <RouterView/>
   </div>
-  <Version version="0.9"/>
+  <Version/>
 </template>
 
 <script>

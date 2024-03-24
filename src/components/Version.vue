@@ -1,14 +1,17 @@
 <script>
+import { version } from "@/../package.json"
 export default {
   name: "Version",
-  props: {
-    version: String
+  data() {
+    return {
+      version
+    }
   }
 }
 </script>
 
 <template>
-  <div class="version">v{{version}}</div>
+  <div class="version">{{version}}</div>
 </template>
 
 <style scoped>
@@ -17,6 +20,8 @@ export default {
   color: grey;
   position: fixed;
   bottom: 1vh;
-  right: 1vh;
+  min-width: 100vw;
+  text-align: right;
+  padding-right: 1vw;
 }
 </style>
