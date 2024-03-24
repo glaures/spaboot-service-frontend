@@ -29,6 +29,10 @@ import TaskList from "@/components/TaskList.vue";
       <div class="h2">Bootinstruktionen</div>
       <TaskList :tasks="instructions" @show-info="showInfo($event)"/>
     </div>
+    <div class="mt-3" v-if="setOff.length > 0">
+      <div class="h2">Ablegen</div>
+      <TaskList :tasks="setOff" @show-info="showInfo($event)"/>
+    </div>
   </div>
   <div class="modal fade" tabindex="-1" id="infoModal">
     <div class="modal-dialog">
@@ -48,21 +52,22 @@ import TaskList from "@/components/TaskList.vue";
 import {createClient} from "contentful";
 import {documentToHtmlString} from "@contentful/rich-text-html-renderer";
 import {Modal} from "bootstrap";
-import { BLOCKS } from '@contentful/rich-text-types';
+import {BLOCKS} from '@contentful/rich-text-types';
 
 const space = 'gdb2xwu41tp3'
 const accessToken = 'sog4clElan4c9rnNSsqJhxf42oLKRfSxQimYOJBxEu4'
 const contentful = createClient({space: space, accessToken: accessToken})
 const renderHtmlOptions = {
   renderNode: {
-    [BLOCKS.EMBEDDED_ASSET]: ({ data: { target: { fields }}}) =>
+    [BLOCKS.EMBEDDED_ASSET]: ({data: {target: {fields}}}) =>
         `<img src="${fields.file.url}" width="300" alt="${fields.description}"/>`,
   },
 }
 export default {
   name: "ProcessView",
   props: {
-    processId: String
+    processId: String,
+    processId2: String
   },
   data() {
     return {
@@ -98,22 +103,30 @@ export default {
   methods: {
     async loadTasks() {
       console.log("processId: " + this.processId)
-      const process = await contentful.getEntry(this.processId, {limit: 1, include: 10}).then(p => p.fields)
+      const process = await this.loadProcess(this.processId, this.$route.query.trip)
+      if(this.processId2) {
+        console.log("processId2: " + this.processId2)
+        const process2 = await this.loadProcess(this.processId2, this.$route.query.trip2)
+        process.tasks.push.apply(process.tasks, process2.tasks)
+        process.title += ' ' + process2.title
+      }
+      this.process = process
+    },
+    async loadProcess(processId, isTrip){
+      let process = await contentful.getEntry(processId)
+          .then(p => p.fields)
           .catch(err => console.error(err))
-      console.log("process is " + process.title)
       if (process.includes) {
-        console.log('loading included tasks from ' + process.includes.sys.id)
         const includedTasks = await contentful.getEntry(process.includes.sys.id)
             .then(includedProcess => includedProcess.fields.tasks)
             .catch(err => console.err)
-        console.log('included tasks are ' + JSON.stringify(includedTasks))
         includedTasks.push.apply(includedTasks, process.tasks)
         process.tasks = includedTasks
       }
-      if (this.$route.query.trip === 'false') {
+      if (!isTrip) {
         process.tasks = process.tasks.filter(t => !t.fields.tripOnly)
       }
-      this.process = process
+      return process
     },
     showInfo(task) {
       this.infoHeader = task.fields.name
@@ -122,8 +135,14 @@ export default {
       this.uniqueModal.show();
     }
   },
-  mounted() {
-    this.loadTasks()
+  watch: {
+    processId: {
+      handler(newVal) {
+        if (newVal)
+          this.loadTasks()
+      },
+      immediate: true
+    }
   }
 }
 </script>

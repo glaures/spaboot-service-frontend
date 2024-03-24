@@ -11,7 +11,7 @@ const router = createRouter({
       component: () => import('../views/SelectWorkShiftView.vue')
     },
     {
-      path: '/process/:processId',
+      path: '/process/:processId/:processId2?',
       name: 'process',
       props: true,
       component: () => import('../views/ProcessView.vue')
