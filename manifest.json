@@ -4,7 +4,7 @@
 
   "short_name": "Service",
 
-  "start_url": "https://glaures.github.io/spaboot-service-frontend",
+  "start_url": "/",
 
   "display": "standalone",
 
