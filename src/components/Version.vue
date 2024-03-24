@@ -22,6 +22,6 @@ export default {
   bottom: 1vh;
   min-width: 100vw;
   text-align: right;
-  padding-right: 1vw;
+  padding-right: 5vw;
 }
 </style>
