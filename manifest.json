@@ -1,12 +1,10 @@
 {
-
   "name": "SPABoot Service",
-
-  "short_name": "Service",
-
+  "short_name": "Service 2",
+  "start_url": ".",
+  "background_color": "#5A738A",
+  "theme_color": "#5A738A",
   "display": "standalone",
-
-  "theme_color": "#6c1010",
   "icons": [
     {
       "src": "./icons/android-chrome-192x192.png",
