@@ -4,7 +4,7 @@ import Navigation from "@/components/Navigation.vue";
 </script>
 
 <template>
-  <div class="fixed-top bg-light px-3">
+  <div class="fixed-top">
     <Navigation/>
   </div>
   <div class="fixed-top-margin pb-5">

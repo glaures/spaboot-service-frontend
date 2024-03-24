@@ -33,7 +33,7 @@ import TaskList from "@/components/TaskList.vue";
   <div class="modal fade" tabindex="-1" id="infoModal">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header sticky-top bg-light">
           <h5 class="modal-title">{{ infoHeader }}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>

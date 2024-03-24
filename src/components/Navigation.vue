@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  <div class="nav navbar">
+  <div class="nav navbar px-3">
     <div class="navbar-brand">
       <router-link to="/">
         <img src="https://res.cloudinary.com/spaboot/image/upload/logo" height="20"/>
