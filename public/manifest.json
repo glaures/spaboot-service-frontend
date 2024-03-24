@@ -4,8 +4,6 @@
 
   "short_name": "Service",
 
-  "start_url": "/",
-
   "display": "standalone",
 
   "theme_color": "#6c1010",
