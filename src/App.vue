@@ -1,6 +1,7 @@
 <script setup>
 import {RouterLink, RouterView} from 'vue-router'
 import Navigation from "@/components/Navigation.vue";
+import Version from "@/components/Version.vue";
 </script>
 
 <template>
@@ -10,6 +11,7 @@ import Navigation from "@/components/Navigation.vue";
   <div class="fixed-top-margin pb-5">
     <RouterView/>
   </div>
+  <Version version="0.9"/>
 </template>
 
 <script>
