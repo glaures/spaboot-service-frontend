@@ -119,7 +119,7 @@ export default {
       if (process.includes) {
         const includedTasks = await contentful.getEntry(process.includes.sys.id)
             .then(includedProcess => includedProcess.fields.tasks)
-            .catch(err => console.err)
+            .catch(err => console.log(err))
         includedTasks.push.apply(includedTasks, process.tasks)
         process.tasks = includedTasks
       }

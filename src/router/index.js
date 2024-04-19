@@ -15,6 +15,17 @@ const router = createRouter({
       name: 'process',
       props: true,
       component: () => import('../views/ProcessView.vue')
+    },
+    {
+      path: '/process-print/:processId/:processId2?',
+      name: 'process-print',
+      props: true,
+      component: () => import('../views/ProcessPrintView.vue')
+    },
+    {
+      path: '/faqs',
+      name: 'faqs',
+      component: () => import('../views/FAQView.vue')
     }
   ]
 })
