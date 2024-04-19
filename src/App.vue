@@ -1,5 +1,4 @@
 <script setup>
-import {RouterLink, RouterView} from 'vue-router'
 import Navigation from "@/components/Navigation.vue";
 import Version from "@/components/Version.vue";
 </script>
